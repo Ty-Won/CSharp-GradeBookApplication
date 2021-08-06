@@ -44,7 +44,7 @@ namespace GradeBook.UserInterfaces
             
             if (parts[2] == "standard")
             {
-                gradeBook = new BaseGradeBook(name);
+                gradeBook = new StandardGradeBook(name);
             }
             else if(parts[2] == "ranked")
             {
