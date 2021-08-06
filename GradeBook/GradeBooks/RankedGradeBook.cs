@@ -14,24 +14,34 @@ namespace GradeBook.GradeBooks
 
         public override char GetLetterGrade(double averageGrade)
         {
-            if(this.Students.Count < 5)
+            if (Students.Count < 5)
             {
                 throw new InvalidOperationException("Error less than 5 students");
             }
+
+            int studentsPerGradeBucket = (int)Math.Floor(Students.Count * 0.2);
+            int studentsThatPerformedBetter = 0;
+            foreach(Student student in Students)
+            {
+                if(student.AverageGrade > averageGrade)
+                {
+                    studentsThatPerformedBetter += 1;
+                }
+            }
             
-            if(averageGrade >= 80)
+            if(studentsPerGradeBucket > studentsThatPerformedBetter)
             {
                 return 'A';
             }
-            else if (averageGrade >= 60)
+            else if (studentsPerGradeBucket * 2 > studentsThatPerformedBetter)
             {
                 return 'B';
             }
-            else if (averageGrade >= 40)
+            else if (studentsPerGradeBucket * 3 > studentsThatPerformedBetter)
             {
                 return 'C';
             }
-            else if (averageGrade >= 20)
+            else if (studentsPerGradeBucket * 4 > studentsThatPerformedBetter)
             {
                 return 'D';
             }
